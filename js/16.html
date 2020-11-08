@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        #parent{
+            width: 400px;
+            height: 400px;
+            background: green;
+            position: relative;
+            left: 400px;
+            top: 50px;
+        }
+        #child{
+            width: 70px;
+            height: 70px;
+            background: blue;
+            position: absolute;
+            transition: all 500ms linear;
+        }
+        .box{border: 1px red solid;position: absolute;}
+    </style>
+    <script>
+        window.onload=()=>{
+            let button = document.getElementById('button');
+            //事件绑定3个参数：参1表明事件(不带on),参2执行的方法，参3false
+            button.addEventListener('click',()=>{console.log(1)},false);
+            button.addEventListener('click',()=>{console.log(2)},false);
+            //删除绑定，传参与绑定同(参二需要函数变量名，匿名函数无法删除)
+            button.removeEventListener('click',function(){},false);
+            
+            //子div拖拽
+            let parent = document.getElementById('parent');
+            let child  = document.getElementById('child');
+            let n = 20;
+            child.onmousedown=(ev)=>{
+                //创建边框
+                let box = document.createElement('div');
+                box.classList.add('box');
+                box.style.width = child.offsetWidth+'px';
+                box.style.height = child.offsetHeight+'px';
+                box.style.left = child.offsetLeft+'px';
+                box.style.top = child.offsetTop+'px';
+                parent.appendChild(box);
+                //拖拽功能实现
+                let e = ev||event;
+                let x = e.clientX-child.offsetLeft-parent.offsetLeft;
+                let y = e.clientY-child.offsetTop-parent.offsetTop;
+                document.onmousemove=(ev)=>{
+                    let e = ev || event;
+                    leftX = e.clientX-x;
+                    topY = e.clientY-y;
+                    //防止出界
+                    let setLeft = leftX<=parent.offsetLeft?0:
+                    leftX>=parent.offsetLeft+parent.offsetWidth-child.offsetWidth?
+                    parent.offsetWidth-child.offsetWidth:leftX-parent.offsetLeft;
+                    let setTop = topY<=parent.offsetTop?0:
+                    topY>=parent.offsetTop+parent.offsetHeight-child.offsetHeight?
+                    parent.offsetHeight-child.offsetHeight:topY-parent.offsetTop;
+                    //吸附功能
+                    setLeft = setLeft<n?0:setLeft>parent.offsetWidth-child.offsetWidth-n?
+                    parent.offsetWidth-child.offsetWidth:setLeft;
+                    setTop = setTop<n?0:setTop>parent.offsetHeight-child.offsetHeight-n?
+                    parent.offsetHeight-child.offsetHeight:setTop;
+
+                    box.style.left = setLeft+'px';
+                    box.style.top = setTop+'px';
+                }
+                document.onmouseup=()=>{
+                    child.style.left = box.offsetLeft+'px';
+                    child.style.top = box.offsetTop+'px';
+                    box.remove();
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                }
+                return false;//去除鼠标按下时拖拽的默认事件(拖拽时选中文字)
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="button">按钮</button>
+    <div id="parent">
+        <div id="child"></div>
+    </div>
+</body>
+</html>

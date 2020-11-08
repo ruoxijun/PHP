@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            border: 1px blue solid;
+            margin: 10px;
+            padding: 1px;
+            /* box-sizing: border-box; */
+        }
+    </style>
+    <script>
+        // Math.round(num);//四舍五入
+        window.onload=()=>{
+            let div = document.getElementsByTagName('div')[0];
+            console.log("start："+div.offsetWidth,div.offsetHeight);
+            setInterval(() => {
+                //offsetwidth会受border和padding的影响有两种解决方法
+                //1.设置box-sizing: border-box;改变盒模型
+                //2.将width属性写在行间，直接使用 元素.style.width
+                div.style.width = div.offsetWidth-1+'px';//出现不减反增现象
+                //offsetWidth=border.width + padding.width + content.width
+                div.style.height = div.offsetHeight-1+'px';
+            }, 45);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

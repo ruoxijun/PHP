@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单事件</title>
+    <script>
+        //表单元素.onsubmit 表单提交时，自动触发
+        //表单元素.onreset 表单重置时，自动触发
+        //输入框元素.onkeyup 输入时
+        //输入框元素.onblur 失去焦点时
+        //输入框元素.onfocus 获得焦点时
+        window.onload=()=>{
+            let form = document.getElementById('form');
+            form.onsubmit=()=>{
+                alert('表单提交');
+            }
+            form.onreset=()=>{
+                alert('重置表单');
+            }
+
+            let name = document.getElementById('name');
+            name.onkeyup=()=>{
+                alert('你输入了');
+                //提示框点击确定时会让输入框暂时失去焦点，提示框消失后输入框自动获取到焦点
+            }
+            name.onfocus=()=>{
+                console.log('获得焦点')
+            }
+            name.onblur=()=>{
+                console.log('失去焦点')
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="" id="form">
+        用户名：<input type="text" name="user" id="name">
+        密码：<input type="text" name="pass" id="">
+        <input type="submit"><!--自动触发onsubmit表单提交时事件-->
+        <input type="reset"><!--自动触发onreset表单重置时事件-->
+    </form>
+</body>
+</html>

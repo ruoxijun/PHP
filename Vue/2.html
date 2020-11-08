@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue数据与方法</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{num}}----{{n}}<!-- 多个变量 -->
+    </div>
+
+    <script>
+        var data = {num : 1 , n : 0};
+        //阻止修改现有属性,需要在传入Vue前使用
+        // Object.freeze(data);
+        var vm = new Vue({
+            el : "#app",
+            data:data,//传入一个对象
+        });
+
+        //Vue中data值发生改变时视图产生响应更新值
+        data.num = 2;
+        setInterval(() => {
+            data.num++;
+        }, 1000);
+
+        //Vue中的属性和方法用"$"区分开来
+        alert(vm.$data===data);//true
+        alert(vm.$el===document.getElementById("app"));//true
+        //Vue的一个重要方法，观察data属性的变化
+        vm.$watch('num',function(newValue,oldValue){
+            //此方法将在data.num改变后调用
+            //第一个参数是改变后的值，二是改变前(参数名可改)
+            console.log(newValue+"------"+oldValue); 
+        });
+    </script>
+</body>
+</html>

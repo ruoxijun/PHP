@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画基础(首页滚动效果)</title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        #app{
+            position: relative;
+            width: 600px;
+            height: 120px;
+            border: olive 1px solid;
+            margin: 100px auto 50px;
+            overflow: hidden;
+        }
+        ul{
+            list-style: none;
+            position: absolute;
+            width: 1200px;
+            height: 120px;
+            top: 0px;
+            left: 0px;
+        }
+        li{
+            float: left;
+            height: 120px;
+            width: 120px;
+        }
+        #click{
+            width: 55%;
+            height: 30px;
+            margin: 0px auto;
+            text-align: center;
+        }
+        button{
+            height: 30px;
+            margin: 0px 10px;
+            padding: 0px 3px;
+        }
+    </style>
+    <script>
+        
+        //offsetLeft||offsetTop     获取位置
+        //offsetWidth||offsetHeight 获取大小
+        // 上属性无法修改,修改需要使用style
+
+        let color = ['#11EE11','#0997F7','#C211EE','#CCFF00','#DD2248']
+        let to = 3;
+        let time;
+        window.onload=()=>{
+            let list = document.getElementById('list');
+            let click = document.getElementById('click');
+            let arrList = list.getElementsByTagName('li');
+            for (let index = 0; index < arrList.length; index++) {
+                arrList[index].style.background=color[index];
+            }
+            list.innerHTML+=list.innerHTML;
+            toLeft();
+            document.getElementById('toLeft').onclick=()=>{
+                clearInterval(time);
+                toLeft();
+            }
+            document.getElementById('toRight').onclick=()=>{
+                clearInterval(time);
+                toRight();
+            }
+            document.getElementById('reset').onclick=()=>{
+                to=2;
+                list.style.left = 0+'px';
+                clearInterval(time);
+                toLeft();
+                console.log('已重置，当前速度为：'+to);
+            }
+            document.getElementById('add').onclick=()=>{
+                to+=0.5;
+                console.log('当前速度：'+to)
+            }
+            document.getElementById('red').onclick=()=>{
+                if (to>1) {
+                    to-=0.5;
+                }else{
+                    alert('速度：'+to+' 不能在减啦');
+                }
+                console.log('当前速度：'+to);
+            }
+        }
+
+        function toLeft(){//向左滚动
+            time = setInterval(() => {
+                if (-list.offsetLeft<=list.offsetWidth/2) {
+                    list.style.left=list.offsetLeft-to+'px';
+                }else{
+                    list.style.left=0+'px';
+                }
+            }, 35);
+        }
+        function toRight(){//向右滚动
+            time = setInterval(() => {
+                if (list.offsetLeft<=0) {
+                    list.style.left=list.offsetLeft+to+'px';
+                }else{
+                    list.style.left=-list.offsetWidth/2+'px';
+                }
+            }, 35);
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <ul id="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <div id="click">
+        <button id="toLeft">向左滚动</button>
+        <button id="add">滚动加速</button>
+        <button id="reset">重置滚动</button>
+        <button id="red">滚动减速</button>
+        <button id="toRight">向右滚动</button>
+    </div>
+</body>
+</html>

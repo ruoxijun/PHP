@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法-指令</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!--指令是带“v-”前缀的特殊特性-->
+    <!--v-if='data.value'，值为turn显示，false反之-->
+    <div id="app" v-if="if_look">
+        {{msg}}
+        <!--v-bind:标签属性，动态修改标签属性值-->
+        <a v-bind:href="url">{{url}}</a>
+
+        <!--通过@click='functionName'可以为标签绑定一个事件-->
+        <div @click="click1">
+            click1
+            <!--标签为包含关系时，子标签点击事件完成还会执行再父类点击事件-->
+            <!--在该指令后添加'.stop'修饰符，当前点击事件完成后停止-->
+            <div @click.stop="click2">
+                click2
+            </div>
+        </div>
+        <p>{{click}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"look me",
+                if_look:true,
+                url:"4.html",
+                click:"onClick",
+            },
+            methods:{//在这里用键值对的方式创建方法
+                click1 : function(){
+                    this.click="onClick1";//用'this.'访问data中的数据
+                },
+                click2 : function(){
+                    this.click="onClick2";
+                },
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取元素鼠标进出与点击事件</title>
+    <style>
+        #mouse{
+            display: none;
+            width: 20%;
+            border: 1px red solid;
+            }
+        .app{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .toApp{
+            width: 150px;
+            height: 150px;
+            border:1px red solid;
+        }
+    </style>
+    <script>
+        /**
+         * 任何标签都可以加ID，并获取到该标签
+         * 任何标签任何属性都可以修改，采用'标签对象.属性'
+         * HTML中标签属性怎么写，js中就怎么写(除class属性)
+         * class属性需要用'.className="cssClassName"'修改
+         */
+        //onmouseover给标签定义鼠标进入事件监听
+        function onover(){
+            //通过ID获取标签
+            let app = document.getElementById('app');
+            //修改标签的属性
+            app.style.width="200px";
+            app.style.height="200px";
+            app.style.background="green";
+        }
+        //onmouseout给标签定义鼠标退出事件监听
+        function onout(){
+            let app = document.getElementById('app');
+            app.style.width='300px';
+            app.style.height='300px';
+            app.style.background='blue';
+        }
+        //onclick鼠标点击事件
+        function to(){
+            let button = document.getElementById('button');
+            if (button.className=="app"){
+                button.className="toApp"
+                return ;
+            }
+            button.className="app";
+        }
+        //通过js给标签添加事件
+        window.onload=()=>{
+            let app = document.getElementById('app');
+            app.onclick=()=>{
+                app.style.background="#444444";
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 写法一 添加事件时直接同id设置事件
+        在标签内事件定义位置直接写代码，多句用';'分隔-->
+    <h1 onmouseover="mouse.style.display='block'"
+    onmouseout="mouse.style.display='none'">
+        鼠标进入与退出
+    </h1>
+    <!-- 写法二 在添加事件位置通过获取id设置事件-->
+    <h1 onmouseover="document.getElementById('mouse').style.display='block'"
+    onmouseout="document.getElementById('mouse').style.display='none'">
+        鼠标进入与退出
+    </h1>
+    <div id="mouse">鼠标进入了</div>
+    <hr/>
+    <input id="button" type="button" value="改变样式" onclick="to()">
+    <div id="app" class="app" onmouseover="onover()" onmouseout="onout()">
+        app
+    </div>
+
+</body>
+</html>

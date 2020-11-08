@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素选择</title>
+</head>
+<script>
+    window.onload=()=>{
+        let app = document.getElementById('app');
+        let check = document.getElementById('check');
+        // let arrInput = app.getElementsByTagName('input');//获取此标签下的input对象数组
+        let arrInput = app.childNodes;//获取此标签下的子节点对象数组
+        // let arrInput = document.getElementsByName('che');
+        check.onclick=()=>{
+            if (check.checked==true) {
+                for (let index = 0; index < arrInput.length; index++) {
+                    arrInput[index].checked=true;
+                }
+            }else{
+                for (let index = 0; index < arrInput.length; index++) {
+                    arrInput[index].checked=false;
+                }
+            }
+        };
+
+        //选项卡
+        let overIndex;
+        let outIndex=0;
+        let border = document.getElementById('border');//获取最外层元素
+        border.style.width="30%";//设置最外层宽为30%
+        let s = border.getElementsByTagName('span');//获取border下所有span元素
+        let d = border.getElementsByTagName('div');//获取border下所有div
+        for (let index = 0; index < s.length; index++) {
+                s[index].innerHTML=index+1;//写入内容
+                s[index].style.width='25%';
+                s[index].style.textAlign='center';
+                s[index].style.display='block';
+                s[index].style.float='left';
+                s[index].style.background='tan';
+                s[index].onmouseover=()=>{
+                    overIndex = index;
+                    if(overIndex!=outIndex){
+                        s[outIndex].style.background='tan';
+                        d[outIndex].style.display='none';
+                        s[overIndex].style.background='green';
+                        d[overIndex].style.display='block';
+                        outIndex=overIndex;
+                    }
+                }
+            }
+        for (let index = 0; index < d.length; index++) {
+            d[index].innerHTML='<h4>'+(index+1)+'DIV</h4>';
+            d[index].style.display='none';
+            d[index].style.background='red';
+            d[index].style.height='200px';
+        }
+        s[outIndex].style.background='green';
+        d[outIndex].style.display='block';
+
+    }
+</script>
+<body>
+    <input type="checkbox" id="check">
+    <div id="app">
+        <input name="che" type="checkbox" id="">
+        <input name="che" type="checkbox" id="">
+        <input name="che" type="checkbox" id="">
+        <input name="che" type="checkbox" id="">
+        <input name="che" type="checkbox" id="">
+    </div>
+    <hr/>
+    <div id="border">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>

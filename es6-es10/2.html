@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+        //一般函数定义格式
+        function name(params) {}
+        //箭头函数定义格式
+        ()=>{//如果只有一个参数，()可省略
+            //如果只有一个return语句，{}可省略
+        }
+        //如下只有一个参数()省略，留下num
+        let add= (num)=>{
+            //只有一句retuen{}和return同时省略
+            return ++num;
+        }
+        console.log(add(1));
+        //结果如下：
+        let add2= num=> ++num;
+        console.log(add2(2));
+    </script>
+</body>
+</html>

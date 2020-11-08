@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>student</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="vue.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
+        #header {
+            background: skyblue;
+            width: 100%;
+            float: left;
+            position: fixed;
+        }
+        #header img {
+            margin-top: 0.6em;
+            width: 3em;
+            height: 3em;
+            float: left;
+        }
+        #header a {
+            height: 100%;
+            padding: 1.5em 1%;
+            float: left;
+            font-weight: bold;
+            text-align: center;
+        }
+        #header a {
+            height: 100%;
+            color: sienna;
+        }
+        #header a:hover {
+            background: rgb(0, 225, 255);
+            color: rgb(0, 17, 255);
+        }
+        #header #stu {
+            background: tan;
+        }
+        #app {
+            width: 100%;
+            position: absolute;
+            top: 15%;
+        }
+        #app #con {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+        }
+        #app #con h1 {
+            margin: 1em 0;
+        }
+        #app h1 img {
+            margin-bottom: -5px;
+            width: 1em;
+            height: 1em;
+        }
+        #app table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #app table tr:hover {
+            background: darkgray;
+        }
+        #app table tr th {
+            border: solid 1px rgb(49, 48, 48);
+            padding: 5px;
+        }
+        #app table tr td {
+            border: solid 1px rgb(117, 110, 110);
+            padding: 5px;
+        }
+        #footer {
+            padding: 1em 0;
+            width: 100%;
+            text-align: center;
+            background: skyblue;
+            position: absolute;
+            bottom: 10%;
+        }
+        #footer h5 {
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="logo.png" alt="" id="logo" />
+        <a href="#">学院首页</a>
+        <a href="#">学院简介</a>
+        <a href="#">二级学院</a>
+        <a id="stu" href="#">学生基本信息</a>
+    </div>
+
+    <div id="app">
+        <div id="con">
+            <h1><img src="head.png" />学生基本信息表</h1>
+            <table>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>出生日期</th>
+                    <th>身份证号</th>
+                </tr>
+                <tr v-for="list in showlist">
+                    <td>{{list.xh}}</td>
+                    <td>{{list.name}}</td>
+                    <td>{{list.sex}}</td>
+                    <td>{{list.age}}</td>
+                    <td>{{list.sfz}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="footer">
+        <h5>
+            重庆科创职业学院 &nbsp;&nbsp;&nbsp;&nbsp;版权所有&nbsp; | &nbsp;站点地图
+        </h5>
+        <h5>地址：重庆市永川区昌州大道西段28号</h5>
+        <h5>
+            咨询电话： 023-49508222 49508777 渝ICP备09007502号 渝公网安备
+            50011802010074号
+        </h5>
+    </div>
+
+    <script src="student.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event，事件冒泡，鼠标，键盘</title>
+    <style>
+        *{margin: 0px; padding: 0px;}
+        body{
+            width: 1000px;
+            height: 600px;
+        border: 1px green solid;
+        }
+        div{
+            width: 50px;
+            height: 50px;
+            background: blue;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        #keymove{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background: green;
+            top: 300px;
+            left: 300px;
+            transition: all 500ms linear;
+        }
+    </style>
+    <script>
+        // 1.在触发DOM上的某个事件时，会产生一个事件对象event。
+        // 2.这个对象中包含着所有与事件有关的信息。
+        // 3.包括导致事件的元素，事件的类型以及其他与特定事件相关的信息。
+
+        //event事件对象不能兼容所有的浏览器，兼容写法：
+        /**
+         * functon (ev){//ev对象需要在事件函数中作为参数
+         * //我们并不需要传入ev对象，浏览器会自动传入
+         * var Event = ev || event;//选择存在的事件对象
+         * console.log(Event);
+         * (event||ev).cancelBubble=true，阻止冒泡事件
+         * }
+         * */
+
+        /**鼠标属性：
+         * event.clientX：鼠标在可视区内的横坐标
+         * event.clientY：鼠标在可视区内的纵坐标
+         */
+
+        /**键盘事件与属性：
+        * onkeydown：按下
+        * onkeyup：松开
+        * 
+        * onevent.keyCode：键盘键的value
+        * onevent.code：存着键的name
+        */
+
+        window.onload=()=>{
+            //***事件冒泡：子节点相应事件会触发它之上所有层级父节点事件***
+            // (event||ev).cancelBubble=true，阻止冒泡事件
+            document.body.onclick = function(){//点击body事件完成后，自动将触发document事件
+                console.log("body");
+                // event.cancelBubble=true;//阻止冒泡事件
+            }
+            document.onclick = (ev)=>{//document事件完成后将自动触发window事件
+                console.log("document");
+                //获取鼠标在可视区内的位置
+                console.log("x : "+event.clientX,"Y : "+event.clientY);
+                var oEvent=ev||event;  //兼容IE和FireFox Chrome 只要一个为真就可以执行
+                console.log(ev,event);
+            }
+            window.onclick = ()=>{
+                console.log('window');
+                //window.innerWidth,window.innerHeight获取可视区宽高方法二：
+                // console.log(window.innerWidth,window.innerHeight);
+            }
+
+            //标签跟随
+            let div = document.getElementsByTagName('div')[0];
+            document.onmousemove=()=>{
+                console.log(event.clientX,event.clientY)
+                //鼠标可视区坐标加上滚动的距离
+                div.style.left = event.clientX+document.documentElement.scrollLeft+'px';
+                div.style.top = event.clientY+document.documentElement.scrollTop+'px';
+            }
+            //键盘移动
+            let s = 100;
+            let keymove = document.getElementById('keymove');
+            document.onkeydown=(ev)=>{
+                let onevent = ev||event;
+                //键盘按下时code存着键的name，keyCode存着代表键的数值
+                console.log(onevent.code,onevent.keyCode);
+                switch(onevent.keyCode){
+                    case 87: case 38: keymove.style.top=keymove.offsetTop-s+'px';break;
+                    case 65: case 37: keymove.style.left=keymove.offsetLeft-s+'px';break;
+                    case 83: case 40: keymove.style.top=keymove.offsetTop+s+'px';break;
+                    case 68: case 39: keymove.style.left=keymove.offsetLeft+s+'px';break;
+                }
+                //ctrl,shift,altKey按下时对应值为true
+                console.log(event.ctrlKey,event.shiftKey,event.altKey);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div id="keymove"></div>
+</body>
+</html>

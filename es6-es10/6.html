@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串</title>
+</head>
+<body>
+    <script>
+        let str = 'abcdefghigklm';
+        alert(str.startsWith('a'));//以什么开头
+        alert(str.endsWith('lm'));//以什么结尾
+
+        //`${}`字符串模板``中存放字符串与普通字符串一样
+        //``中可用${}插入变量
+        let msg = `123${str}45${str}6`;
+        console.log(msg);
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象</title>
+</head>
+<body>
+    <script>
+        //class表明一个类
+        class User{
+            //constructor表明它是一个构造函数
+            constructor(name,pass){
+                this.name = name;
+                this.pass = pass;
+            }
+            toString(){//添加方法
+                console.log(this.name,this.pass);
+            }
+        }
+        let user = new User('My',111);
+        user.toString();
+        
+        //继承
+        class VipUser extends User{
+            constructor(name,pass,vip){
+                super(name,pass);
+                this.vip = vip;
+            }
+            //可添加新方法
+        }
+    </script>
+</body>
+</html>

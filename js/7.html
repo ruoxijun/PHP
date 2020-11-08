@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取节点</title>
+    <script>
+        // childNodes   nodeType
+        // children
+        // parentNode
+        // offsetParent
+        window.onload = ()=>{
+            let app = document.getElementById('app');
+            //childNodes获取元素子节点，节点包括文本节点标签节点
+            let apps=app.childNodes[1].childNodes;
+            console.log("length"+apps.length);
+            for(let i=0;i<apps.length;i++){
+                //节点属性nodeType值为3，表示时一个文本节点,标签值为1
+                console.log(apps[i].nodeType)
+                console.log(apps[i]);
+            }
+            console.log("-----------------");
+            //children获取元素标签子节点(不包含文本节点)
+            let apps2 = app.children;
+            for(let i=0;i<apps2.length;i++){
+                //节点属性nodeType值为3，表示时一个文本节点,标签值为1
+                console.log(apps2[i].nodeType)
+                console.log(apps2[i]);
+            }
+            console.log("-----------------");
+            // app.parentNode//获取父节点
+            // app.offsetParent//获取定位的父级节点
+            console.log(app.firstElementChild)//第一个子节点
+            console.log(app.lastElementChild)//最后一个子节点
+            console.log(app.firstChild)//第一个子节点(包含文本节点)
+            console.log(app.lastChild)//最后一个子节点(包含文本节点)
+            console.log("-----------------");
+            console.log(app.nextElementSibling)//第一个子节点
+            console.log(app.previousElementSibling)//最后一个子节点
+            console.log(app.nextSibling)//第一个子节点(包含文本节点)
+            console.log(app.previousSibling)//最后一个子节点(包含文本节点)
+            
+            //一般不用与.style效果一样
+            app.getAttribute('styleName');//获取元素属性
+            app.setAttribute('styleName','value');//设置属性
+            app.removeAttribute('styleName');//删除
+
+            console.log("-----------------");
+            let $ = app.getElementsByTagName('*');//统配符'*'表示该对象下的所有标签
+            console.log($.length)
+            for(let i=0;i<$.length;i++){
+                console.log($[i]);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <span>1</span>
+        <span>2</span>
+        <div>3</div>
+        <ul>4
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    <!-- <table id="app">
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table> -->
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>style与className，对象访问</title>
+    <style>
+        #app{
+            width: 100px;
+            height: 100px;
+            border: 1px royalblue solid;
+        }
+        .a{background: tan;}
+    </style>
+    <script>
+        window.onload=()=>{
+            let app = document.getElementById('app');
+            //js中style的读写都在行间(此标签内)
+            alert(app.style.background);
+            //什么都没显示出来，它的background没有写在标签内
+        }
+
+        function to(type,back){
+            let app = document.getElementById('app');
+            //js中对象访问除了'.'以外还能用像数组一样的方式'[keyStr]'来访问对象属性
+            //这样做的好处是更加灵活能用字符串访问属性，坏处是操作麻烦
+            app.style[type]=back;
+        }
+        function toCN(){
+            /**
+             * 在js中最好style与className择一使用，
+             * 样式优先级：行间样式(写在标签内的样式)>ID>class>标签自身>*，
+             * js改变style(行间样式)后className将不起作用
+             */
+            let app = document.getElementById('app');
+            app.className='a';
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="变红" onclick="to('background','red')">
+    <input type="button" value="变绿" onclick="to('background-color','green')">
+    <input type="button" value="变蓝" onclick="to('background-color','blue')">
+    <!-- 上面是写在行间样式中的style级别最高
+    样式优先级：行间样式(写在标签内的样式)>ID>class>标签自身>*
+    下面是改变的class，点击后下方将不起作用 -->
+    <input type="button" value="className" onclick="toCN()">
+    <div id="app"></div>
+</body>
+</html>

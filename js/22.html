@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+    <script>
+        var str = 'AbcAd6efA1g';
+        //对象方式创建正则
+        var re=new RegExp('a');//它与/a/无异
+        re=/a/;//直接赋值创建(与上无异)
+        //参1：查找的字符串，参2：'i'表示忽略大小写
+        re=new RegExp('a','i');//re=/a/i;
+        //search：只能查找并返回一个位置
+        console.log(str.search(re));//匹配a字母位置忽略大小
+        re=/\d/;//'\d'随意的一个数字,几个'\d'表示几位数
+        console.log(str.search(re));//匹配数字位置
+
+        //match：获取匹配的字符串
+        var num =' 234 owi 23 28aio 27 987 adfk';
+        console.log(num.match(re));//匹配数字(默认一个)
+        re=/\d/g;//'g'找出全部内容
+        console.log(num.match(re));//匹配出全部数字(按个位)
+        re=/\d+/g;//'+'量词若干
+        //匹配出所有数字(按若干位，被非数字字符隔开为止)
+        console.log(num.match(re));
+
+        //replace：替换字符串
+        console.log(str.replace('A','a'));//将第一个'A'替换为'a'
+        re=/A/g;
+        console.log(str.replace(re,'a'));//将所有A'替换为'a'
+        re=/a|b|d/g;//'|'或
+        console.log(str.replace(re,'*'));//将所有a或b或d换为'**'
+        re=/d[ab6]e/g;//'[可选的字符]'任意字符
+        console.log(str.match(re));//找出所有的de包围的中间字符为ab6任意的
+        re=/[a-q]A/g;//'[start-end]',范围(可数字或字符)
+        console.log(str.match(re));//找出A前为a至q的所有字符
+        re=/[^1-9a-c]/g;//'^'除了某些字符以外(非)，可与范围连用
+        console.log(str.match(re));//除了1至9和a至c的所有字符
+        re=/<[^<>].+>/g;//'.'任意的
+
+        //转义字符
+        '\d'//表示数字
+        '\w'//表示英文，数字，下划线
+        '\s'//表示空白字符(空格，tab...)
+        //大小时取非
+        '\D'//[^0-9]
+        '\W'//[^0-9a-z_]
+        '\S'//非空白字符
+
+        //量词：
+        '{n}'//正好出现n次
+        '{n,m}'//最少n次最多m次
+        '+'//若干等同'{1,}'
+        '?'//可有可无等同'{0,1}'
+        '*'//可有可无且若干等同'{0,}'
+
+        '/^ 正则表达式 $/'//^不在[]中表示行首$表示行尾
+        //test字符串中有一部分满足规则则返回true
+        //使用时正则建议用'/^$/'包起来
+        re.test(str);//字符串是否符合正则规则
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

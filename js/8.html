@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建DOM元素（创建，插入，删除）</title>
+    <script>
+        // classList属性：其包含以下属性和方法：
+        // length
+        // item（）（也可以用方括号语法）：取得每个元素
+        // add（）：将给定的字符串值添加到列表中。如果值已经存在，就不添加。
+        // contains（）：表示列表中是否存在给定的值，如果存在则返回true，否则返回false。
+        // remove（）：从列表中删除给定的字符串。
+        // toggle（）：如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。
+
+        /*
+        document.createElement(标签名)//创建一个节点(存在内存中)
+        父级.appendChild(子节点)//追加一个节点(将节点放入HTML中)
+        //append和appendChild都会做两件事情，将此节点原在节点删除在指定父级中插入
+
+        insertBefore(节点,原有节点)//在已有元素前插入
+        removeChild(节点)//删除一个节点
+        */
+        window.onload=()=>{
+            let num = 1;
+            let app = document.getElementById('app');
+            app.onclick=()=>{
+                let d = document.createElement('h1');//创建节点
+                let a = document.createElement('a');
+                d.innerHTML=num++;
+                a.innerHTML=num++;
+                app.appendChild(d);//只能插入一个节点，不能插入文本
+                app.insertBefore(a,d);
+                app.removeChild(d);
+                //app.append(a,d);//可插入多个，也可插入文本
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="app">
+        onClick
+    </div>
+</body>
+</html>

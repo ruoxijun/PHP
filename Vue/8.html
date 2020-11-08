@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <ul><!--遍历数组,in前第一个参数代表数组元素，参2表示角标(可不写)-->
+            <li v-for="list,key in lists" v-bind:key="key">
+                {{key}}--{{list.msg}}
+            </li>
+        </ul>
+        <ul><!--遍历对象,in前第一个参数代表对象的value，参2表示key(可不写)-->
+            <li v-for="value,key in obj" v-bind:key="key">
+                <!--v-bind:key跟排序有关-->
+                {{key}}--{{value}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"列表渲染",
+                lists:[
+                    {msg:'list1'},
+                    {msg:'list2'},
+                    {msg:'list3'},
+                ],
+                obj:{
+                    naem:'obj',
+                    value:1,
+                    time:'2020年4月19日19:06:01',
+                }
+            },
+        });
+    </script>
+</body>
+</html>

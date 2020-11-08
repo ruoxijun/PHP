@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间与计时器</title>
+</head>
+<script>
+    /**
+     * new Date():日期对象
+     * .getFullYear();//年
+     * .getMonth();//月0开始
+     * .getDate();//日
+     * .getDay();//星期
+     * .getHours()//时钟数
+     * .getMinutes()//分钟数
+     * .getSeconds()//秒数
+     */
+    var date = new Date();
+    alert(date.getFullYear());
+    alert(date.getMonth());
+    alert(date.getDate());
+    alert(date.getDay());
+    function getDate(){
+        let time = (new Date().getHours()<10?'0'+new Date().getHours() : new Date().getHours())+":"
+        +(new Date().getMinutes()<10?'0'+ new Date().getMinutes() : new Date().getMinutes())+":"
+        +(new Date().getSeconds()<10?'0'+new Date().getSeconds() : new Date().getSeconds());
+        return time;
+    }
+
+    let interval = setInterval(function (){//计时器
+        console.log(getDate());
+    }, 1000);
+    // clearInterval(interval);//关闭定时器
+    let timeout = setTimeout(() => {//延时器
+        alert("延时器:"+getDate());
+    }, 1000);
+    // clearTimeout(timeout);//关闭延时器
+
+    let str = '123';//字符串可以像数组一样使用
+    for (let index = 0; index < str.length; index++) {
+        console.log(str[index]);
+    }
+</script>
+<body>
+    
+</body>
+</html>

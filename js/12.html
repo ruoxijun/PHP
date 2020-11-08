@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器运用</title>
+    <style>
+        div{
+            width: 100px;
+            height: 60px;
+            background: blue;
+            margin: 15px 0;
+        }
+    </style>
+    <script>
+        //考虑哪些变量可以共用，不能共用的创建为它自身的属性
+        let speed = 5;
+        window.onload=()=>{
+            divs = document.getElementsByTagName('div');
+            console.log(divs);
+            for (let index = 0; index < divs.length; index++) {
+                //多物体使用同函数时，除特殊情况建议都创建私有属性，来表达一些值
+                divs[index].time = null;//在元素内创建一个管理自身定时器的属性
+                divs[index].onmouseover=function(){//鼠标进入
+                    console.log(index+'onmouseover');
+                    startEnd(this,400);
+                };
+                divs[index].onmouseout=function(){//鼠标退出
+                    console.log(index+'onmouseout');
+                    start(this,100);
+                };
+            }
+        }
+        function startEnd(item,movewidth){
+            clearInterval(item.time);//避免鼠标多次进入触发多个定时器
+            item.time = setInterval(() => {
+                if(item.offsetWidth<movewidth){
+                    item.style.width = item.offsetWidth+speed+'px';
+                }else{
+                    //在定时器中关闭定时器，它会将剩下的语句执行完毕才会停止 
+                    clearInterval(item.time);
+                    item.style.width = movewidth+'px';//避免误差，最后让宽靠在终点
+                    console.log('clearInterval onmouseover');
+                }
+            }, 30);
+        }
+        function start(item,movewidth){//基本与上同
+            clearInterval(item.time);
+            item.time = setInterval(() => {
+                if(item.offsetWidth>movewidth){
+                    item.style.width = item.offsetWidth-speed+'px';
+                }else{
+                    clearInterval(item.time);
+                    item.style.width = movewidth+'px';
+                    console.log('clearInterval onmouseout')
+                }
+            }, 30);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

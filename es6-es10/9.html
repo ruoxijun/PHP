@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise-异步</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //每个axios.get请求返回一个Promise类型对象
+        let prom = axios.get('./4/student.php');
+        /**
+         * then两个参数都是函数
+         * 第一个函数会请求成功时运行，参数是传入请求到的数据
+         * 参二请求失败运行，参数是一个异常(错误)
+         */
+        prom.then((arr)=>{
+            console.log("成功");
+            console.log(arr);
+        },
+        (err)=>{
+            console.log("失败");
+            console.log(err);
+        });
+
+        //Promise.all一次处理多个请求
+        Promise.all([//以数组形式传入请求
+            axios.get('../4/student.php'),
+            axios.get('../4/student.php')
+        ]).then(array=>{
+            //函数一传入的是以数组形式得到的数据
+            let [a,b] = array;
+            console.log(a,b);
+        },
+        err=>{
+            console.log("出错啦！");
+        });
+    </script>
+</body>
+</html>

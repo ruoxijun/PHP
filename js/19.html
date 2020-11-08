@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json对象,类继承,系统对象</title>
+    <script>
+        //json对象：
+        let json ={
+            a:1,
+            fun:function(){
+                // console.log(this.a);
+            }
+        }
+        json.fun();
+
+        //call可以改变函数执行时里面的this
+        function show(a,b){
+            // console.log(this,a,b);//this改变,b为undefined
+        }
+        show.call(1,2);//call第1个参会传给this
+        //继承(利用call可改变this原理)：
+        function A(a){this.a = a;}
+        A.prototype.show = function(){
+            console.log(this.a);};
+        function B(a){
+            A.call(this,a);//使父类this指向此类this
+        }
+        //继承prototype中属性的方法：
+        //1,子原型一旦改变父原型跟着改变
+        // B.prototype=A.prototype;//不推荐使用
+        //2,遍历赋值方式
+        // for(let i in A.prototype){//不能用'.'来访问，用'[]'
+        //     B.prototype[i]=A.prototype[i];}
+        //3,属性替换
+        B.prototype=new A();//替换已知对象的prototype
+        B.prototype.constructor=B;//替换构造方法
+        new B(1).show();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

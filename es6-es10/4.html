@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+<body>
+    <script>
+        //左右两边结构必须一样，右边是对象或数组
+        let array = [1,2,3];
+        let [a,b,c] = array;
+        //将array中元素拆解赋值给左边的变量
+        console.log(a,b,c);
+        //同理对象
+        let {d,e,f} = {d:4,e:5,f:6};
+        console.log(d,e,f);
+        //可以更为复杂如对象中有数组或数组中有对象等
+        let [a2, b2, [c2,d2]] = [[1,2], {a:3,b:4}, [5,6]];
+        console.log(a2, b2, c2, d2);
+    </script>
+</body>
+</html>

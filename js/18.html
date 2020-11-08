@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS面对对象</title>
+</head>
+<style>
+    #app{
+        width: 500px;
+        height: 500px;
+        border: 1px blue solid;
+    }
+    #app span{
+        width: 125px;
+        height: 50px;
+        border: 1px red solid;
+        background: burlywood;
+        box-sizing: border-box;
+        float: left;
+    }
+    #app div{
+        width: 100%;
+        height: 450px;
+        box-sizing: border-box;
+        background: aquamarine;
+        float: left;
+        display: none;
+    }
+
+</style>
+<script>
+    //对象的this
+    let test={};test.a = {};
+    //对象使用前必须声明为对象，否则报错
+    test.a.b = 1;
+    test.a.f= function(){
+        console.log(this.b);//this属于当前块属性的对象
+    }
+    test.a.f();
+
+    function obj(){
+        console.log(this);
+    }
+    obj();//直接调用方法this指向window
+    /** new 调用方法时：
+     * 系统替我们构造了一个对象，赋给this
+     * 最后返回this
+     * var this=new Object();
+     * return this;
+     */
+    new obj();
+    //原型prototype：(一般构造函数添加类属性，用原型添加类方法)
+    //JS无法为已有的对象构造器添加新属性，prototype 属性允许为对象构造器添加新属性
+
+    //选项卡对象：请在CSS中div设置display:none;
+    function Tab(divParent){
+        //成员变量创建需加上this
+        this.tabHead = divParent.getElementsByTagName('span');
+        this.tabCon = divParent.getElementsByTagName('div');
+        this.border = this.tabHead[0].style.border;
+        //访问成员变量属性时也需要用this指明
+        this.tabHead[0].style.border = 'none';
+        this.tabHead[0].style.background = 'aquamarine';
+        this.tabCon[0].style.display = 'block';
+    }
+    Tab.prototype.check=function(){//被选中时
+        //在click事件中对象this改变
+        tabThis = this;//记录当前this方便，对象改变时使用
+        for(let i = 0;i<this.tabHead.length;i++){
+            this.tabHead[i].onclick=()=>{
+                //在事件方法中this改变，只能同过之前记录的this来访问
+                for(let i=0;i<tabThis.tabHead.length;i++){
+                    tabThis.tabCon[i].style.display = 'none';
+                    tabThis.tabHead[i].style.background = 'burlywood'
+                    tabThis.tabHead[i].style.border = tabThis.border;
+                }
+                tabThis.tabCon[i].style.display = 'block';
+                tabThis.tabHead[i].style.background = 'aquamarine';
+                tabThis.tabHead[i].style.border = 'none';
+            }
+        }
+    }
+
+    window.onload=()=>{
+        let app = document.getElementById('app');
+        /** 面向过程方式编写选项卡：
+         * let tabH = app.getElementsByTagName('span');
+         * let tabC = app.getElementsByTagName('div');
+         * let border  = tabH[0].style.border;
+         * tabC[0].style.display = 'block';
+         * tabH[0].style.background = 'aquamarine';
+         * tabH[0].style.border = 'none';
+         * for(let i = 0;i<tabH.length;i++){
+         *     tabH[i].onclick=()=>{
+         *         for(let i=0;i<tabH.length;i++){
+         *             tabC[i].style.display = 'none';
+         *             tabH[i].style.background = 'burlywood'
+         *             tabH[i].style.border = border;
+         *         }
+         *         tabC[i].style.display = 'block';
+         *         tabH[i].style.background = 'aquamarine';
+         *         tabH[i].style.border = 'none';
+         *     }
+         *   }
+         **/
+        new Tab(app).check();
+    }
+</script>
+<body>
+    <div id="app">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件基础</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <my-header title="自定义属性"></my-header><!--调用组件 -->
+        <!--复用组件，并且使用自定义的点击事件监听,方法中不能传入参数否则变成普通方法-->
+        <my-header v-on:click-f="click">
+            <h5>slot插入</h5>
+        </my-header>
+    </div>
+    <script>
+        //用Vue.component方法创建组件，参1表示组件名，参2是个对象用来描述组件
+        Vue.component("my-header", {
+            //props可为组件添加属性多个用','分隔，可利用此属性传递数据
+            props:['title'],
+            //data存放组件数据
+            data:function(){
+                return {
+                    count:0,
+                    msg:"hi"
+                }
+            },
+            //template描述组件模板,模板内也可访问渲染props定义的属性
+            template:'<div v-on:click="counts">{{title}} count:{{count}}<slot></slot></div>',
+            //模板的最外层只能有一个标签，当模板为多个同级标签时，必须由一个父级标签包裹
+            //<slot></slot>定义自定义组件插入标签时标签位置
+            methods: {
+                counts:function(){
+                    this.count++;
+                    //this.$emit自定义点击事件，参1函数名(不建议有大写字母建议用'-'隔开)
+                    //参2返回值(自动传入指定函数方法中),多个可继续添加
+                    this.$emit("click-f",this.count);//在自定义组件中使用
+                }
+            },
+        });
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello Vue",
+            },
+            methods: {
+                click:function(a){//自定义点击属性监听的方法a参数自动传入
+                    console.log(a);
+                },
+            },
+        });
+    </script>
+</body>
+</html>

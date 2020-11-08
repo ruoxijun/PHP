@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非行间样式，数组sort</title>
+    <style>
+        #app{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script>
+        window.onload=()=>{
+            let app = document.getElementById('app');
+            // console.log('style:'+app.style.width);
+            // console.log('IE:'+app.currentStyle.width);
+            console.log(getComputedStyle(app,null).backgroundColor);
+
+            let arr = [78,325,4,5,45,444];
+            //sort将数组按(字符串)升序排序，它不认识数字需要自行传入比较方法
+            console.log(arr.sort());//[325, 4, 444, 45, 5, 78]
+            console.log(arr.sort((n1,n2)=>{
+                if(n1>n2)
+                    return 1;
+                else if(n1<n2)
+                    return -1;
+                else
+                    return 0;
+            }));//[4, 5, 45, 78, 325, 444]
+        }
+    </script>
+</head>
+<body>
+    <div id="app" style="font-size: 20px;">div</div>
+</body>
+</html>

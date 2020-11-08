@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表当输入绑定</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--v-model使表单输入数据双向绑定-->
+        <input type="text" v-model='msg'><!--此输入与data中msg相绑定-->
+        <p>inputValue: {{msg}}</p>
+        <hr/>
+        <textarea v-model='area'></textarea>
+        <p>textarea : {{area}}</p>
+        <hr/>
+        <p>Sex : 
+            <!--选中的值与data中radio相绑定，选中的value会赋值给radio-->
+            <input type="radio" value="nan" v-model="radio">男
+            <input type="radio" value="nv" v-model="radio">女
+            <p>radio : {{radio}}</p>
+        </p>
+        <hr/>
+        <p>Love : 
+            <!--与checkBox相绑定它对应的是个数组，复选框值有多个值，选中的值会依次传入绑定的数组-->
+            <input type="checkbox" value="qiu" v-model="checkBox">打球
+            <input type="checkbox" value="yun" v-model="checkBox">玩游戏
+            <input type="checkbox" value="look" v-model="checkBox">看电影
+            <p>checkbox : {{checkBox}}</p>
+        </p>
+        <!--提交利用方法-->
+        <input type="button" v-on:click="submit" value="提交">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                //都可以为表单设置默认值
+                msg:"hello Vue",
+                area:"textarea",
+                radio:"nv",
+                checkBox:['yun','look'],
+            },
+            methods: {
+                submit:function(){
+                    //提交时建议将数据整理到一个对象提交
+                    obj = {
+                        msg:this.msg,
+                        area:this.area,
+                        radio:this.radio,
+                        checkbox:this.checkBox,
+                    };
+                    console.log(obj);
+                },
+            },
+        });
+        var obj;
+    </script>
+</body>
+</html>

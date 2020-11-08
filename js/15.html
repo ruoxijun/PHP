@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>默认行为</title>
+    <style>
+        div{width: 200px;
+        height: 200px;
+        background: blue;
+        position: absolute;
+        top: 200px;
+        left: 300px;}
+    </style>
+    <script>
+        //鼠标右键事件
+        document.oncontextmenu = ()=>{
+            return false;//阻止鼠标右键弹窗的默认事件
+        }
+        window.onload =()=>{
+            let input = document.getElementById('input');
+            input.onkeydown = (ev)=>{//文本框键盘录入默认事件
+                let e = ev || event;
+                if(e.keyCode>48 && e.keyCode<57){
+                    console.log(e.keyCode)
+                    return true;
+                }
+                //返回false的键按下的值无法被录入(汉字模式回车可输入)
+                return false;//按键默认功能被阻止(如退格键不能删除)
+            }
+
+            //鼠标拖拽物体(原理：down(move,up))
+            let div = document.getElementById('div');
+            let mX,mY;
+            div.onmousedown=(ev)=>{
+                let e = ev||event;
+                mX = e.clientX-div.offsetLeft;
+                mY = e.clientY-div.offsetTop;
+                console.log(mX,mY)
+                document.onmousemove=(ev)=>{
+                    let e = ev||event;
+                    let x = e.clientX - mX,y = e.clientY - mY;
+                    //当物体要超出视图范围时
+                    x=x<0?0:x;
+                    x=x>document.documentElement.clientWidth-div.offsetWidth?
+                    document.documentElement.clientWidth-div.offsetWidth:x;
+                    y=y<0?0:y;
+                    y=y>document.documentElement.clientHeight-div.offsetHeight?
+                    y=document.documentElement.clientHeight-div.offsetHeight:y=y;
+
+                    div.style.left = x +'px';
+                    div.style.top = y +'px';
+                };
+                document.onmouseup=()=>{
+                    document.onmousemove = null;
+                }
+                return false;//阻止鼠标按下默认事件(html鼠标按下本身有个拖拽事件)
+            }
+        }
+        
+
+    </script>
+</head>
+<body>
+    <input type="text" id="input">
+    <div id="div"></div>
+</body>
+</html>

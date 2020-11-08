@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面事件与操作</title>
+    <style>
+        body{height: 2000px;width: 2000px;}
+        #app{
+            width: 100px;
+            height: 100px;
+            background:blue;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            transition:all 1s linear ;
+            }
+        button{
+            margin: 150px;
+        }
+    </style>
+    <script>
+        /**
+         * //html中因存在渲染问题求滚动的top和left建议用如下方式：
+         * document.documentElement.scrollTop||document.body.scrollTop
+         * document.documentElement.scrollLeft||document.body.scrollLeft
+         * //整个页面的宽高
+         * document.body.scrollWidth
+         * document.body.scrollHeight
+         * //可见页面的宽高
+         * document.documentElement.clientHeight
+         * document.documentElement.clientWidth 
+         */
+        /*
+        document代表的是整个文档(对于一个网页来说包括整个网页结构)，
+        document.documentElement是整个文档节点树的根节点，在网页中即html标签；
+        document.body是整个文档DOM节点树里的body节点，网页中即为body标签元素。
+        DTD告诉浏览器当前文档用的是什么标记语言，然后浏览器才能正确的根据W3C标准解析文档代码。
+        在文档使用了DTD时，document.body.scrollTop的值为0，
+        此时需要使用document.documentElement.scrollTop来获取滚动条滚过的长度；
+        在未使用DTD定义文档时，使用document.body.scrollTop获取值。
+        建议用此方法：
+        var top = document.documentElement.scrollTop || document.body.scrollTop;
+        */
+        let left = 0;
+        window.onload=()=>{
+            let app = document.getElementById('app');
+            let move = document.getElementById('move');
+            move.onclick=()=>{
+                left+=400;
+                app.style.left = left+'px';
+            }
+        }
+        //Math.abs(num)//取绝对值
+        window.onscroll=()=>{//只有当页面滚动时才会生效
+            //页面向下滚动的距离（可视区上边距，距离整个页面上边距的距离）
+            let top = document.documentElement.scrollTop || document.body.scrollTop;
+            //页面向右滚动的距离（可视区左边距，距离整个页面左边距的距离）
+            let left = document.documentElement.scrollLeft || document.body.scrollLeft;
+            //上下居中方式：(可视区高-组件高)/2+下滚动距离
+            app.style.top=(document.documentElement.clientHeight
+            -app.offsetHeight)/2+top+'px';
+            //左右居中方式：(可视区宽-组件宽)/2+右滚动距离
+            app.style.left=(document.documentElement.clientWidth
+            -app.offsetWidth)/2+left+'px';
+            app.innerHTML=top+'px : '+left+'px';
+        }
+    </script>
+</head>
+<body>
+    <div id="app"></div>
+    <button id="move">onclick</button>
+    
+</body>
+</html>

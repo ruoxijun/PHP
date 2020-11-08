@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie本地存储用户信息</title>
+    <script>
+        //用字符串key=value的形式赋值，expires过期时间(Date对象)
+        document.cookie = "name=user;expires="+date;//不设置关闭浏览器时过期
+        document.cookie = "pass=111";//继续添加
+        console.log(document.cookie);//返回信息字符串
+        setCookie('key','value',-1);//修改key值与时间,时间为负则删除
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

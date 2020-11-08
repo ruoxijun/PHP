@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间</title>
+    <script src="../vue.js"></script>
+    <script>
+        window.onload=()=>{
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    Hours:'00',
+                    Minutes:'00',
+                    Seconds:'00',
+                },
+            });
+            function getTime(){
+                vm.$data.Hours=gHours();
+                vm.$data.Minutes=gMinutes();
+                vm.$data.Seconds=gSeconds();
+            }
+            getTime();
+            setInterval(() => {
+                getTime();
+            }, 1000);
+        };
+        function gHours(){
+            let hours = new Date().getHours();
+            return hours<10?'0'+hours:hours;
+        }
+        function gMinutes(){
+            let minutes = new Date().getMinutes();
+            return minutes<10?'0'+minutes:minutes;
+        }
+        function gSeconds(){
+            let seconds = new Date().getSeconds();
+            return seconds<10?'0'+seconds:seconds;
+        }
+    </script>
+</head>
+<body>
+    <div id="app" style="font-size: 3em; font-weight: bold;">
+        <span>{{Hours}}</span>
+        <span> : </span>
+        <span>{{Minutes}}</span>
+        <span> : </span>
+        <span>{{Seconds}}</span>
+    </div>
+</body>
+</html>

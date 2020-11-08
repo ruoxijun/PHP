@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class与style绑定</title>
+    <script src="vue.js"></script>
+    <style>
+        .green{color: blue;}
+        .blue{background: green;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--class绑定"v-bind:class='{样式类名:data.bool}'"-->
+        <p v-bind:class="{green:isGreen,blue:isBlue}">{{msg}}</p>
+        <!--'{}'内绑定类名 和 决定是否绑定的变量(bool)写在':'两边-->
+        <!--需要绑定多个类用','隔开，且与已有类和样式不冲突-->
+
+        <!--可用'[]'绑定，下面静态绑定，多个用','隔开-->
+        <p v-bind:class="['green','blue']">[]静态绑定</p>
+        <!--利用三元表达式动态绑定类样式-->
+        <p v-bind:class="[isGreen?'green':'blue',isBlue?'':'blue']">三元</p>
+
+        <!--用v-bind:style动态绑定样式(属性都是驼峰形式命名)，可使用三元控制取值-->
+        <p v-bind:style="{color:red,fontSize:fontsize+'em'}">Style</p>
+        <!--也可绑定一个类v-bind:style="obj",值记得用''引起来-->
+        <p v-bind:style="style">Object</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello Vue",
+                isGreen:true,
+                isBlue:false,
+                red:"red",
+                fontsize:2,
+                style:{
+                    color:'green',
+                    fontSize:"2em",
+                }
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generator-生成器</title>
+</head>
+<body>
+    <script>
+        generator一种特殊的函数能停
+        function* show(){//*挨着谁都可以，最好不要同时挨着两
+            console.log(1);
+            yield;//函数运行到此停止(可有多个)
+            console.log(2);
+        }
+        // show();//直接调用没有反应
+        let s = show();//它返回了一个对象
+        s.next(3);//通过此对象的next属性才能执行
+        console.log('stop');//generator函数暂停时会继续执行其它语句
+        s.next(4);//继续向下执行
+
+        // yield的传参和返回值
+        function* show2(){
+            console.log(1);
+            let n =yield;//传参
+            console.log(n);//5
+            console.log(2);
+            yield 6;//返回值
+            //yield返回值交给了next返回对象中的value
+            console.log(3);
+        }
+        let s2 = show2();
+        //传参接受到的值是使yield下面语句执行的next传的值
+        console.log(s2.next(4));//给yield传参{done:false value:undefined}
+        console.log(s2.next(5));//给yield传参{done:false value:6}
+        console.log(s2.next());//接收yield的值{done: true value: undefined}
+        //next返回对象中value是yield的返回值，done表示此函数是否结束
+    </script>
+</body>
+</html>

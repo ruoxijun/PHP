@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json</title>
+</head>
+<body>
+    <script>
+        // JSON.stringify:js对象转字符串
+        // JSON.parse:字符串转js对象
+        let obj = {a:1,b:2};
+        console.log(JSON.stringify(obj));//{"a":1,"b":2}
+        //JSON标准写法:
+        //所有key必须用双引号包起来
+        //value是字符串或字符时只能用双引号
+        console.log(JSON.parse('{"a":"a","b":1}'));//{a:"a",b:1}
+        
+        //简写：
+        //当对象属性名和值变量名相同只写变量名即可
+        //对象中方法可省去':function',直接key(){}
+        let a = 1;
+        // let json = {a:a,b:2};//{a:1,b:2}可简写
+        let json = {a,b:2,
+        show(){console.log(a);}};//{a:1,b:2,show:ƒ}
+        console.log(json);
+    </script>
+</body>
+</html>

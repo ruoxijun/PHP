@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法-插值</title>
+    <script src="vue.js"></script>
+    <style>
+        #red{color: red;}
+        .green{color: green;}
+        .blue{background: blue;}
+    </style>
+</head>
+<body>
+    <div id="app" v-once><!--此标签内的插值只执行一次，数据改变插值不会改变-->
+        <!--文本插值:双大括号"{{}}"包裹一个变量，在data中声明属性取值-->
+        {{msg+" MyVue"}}<!--支持javascript表达式：三元'？：'，数学计算，基本函数-->
+        <p>{{html}}</p><!--以文本方式html语句无法解析-->
+        <!--在标签中添加v-html="data.value"属性可解析HTML语句-->
+        <p v-html="html"></p><!--将此标签中的内容替换成插入的HTML语句-->
+
+        <!--Vue通过"v-bind:id||class='data.value'"可以改变id和class-->
+        <p v-bind:id="red">{{red}}</p><!--v-bind:标签属性="value"-->
+        <p v-bind:class="green">{{green}}</p><!--v-bind用于动态改变标签需要的属性-->
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello world",
+                html:"<h1>html h1</h1>",
+                red:"red",
+                green:"green blue",
+            },
+        });
+    </script>
+</body>
+</html>

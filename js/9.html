@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格相关js</title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        table{width:40%;margin: 10px 0px;}
+    </style>
+    <script>
+        window.onload=()=>{
+            // let table = document.getElementsByTagName('table')[0].children[0].children[2].children;
+            // for (let index = 0; index < table.length; index++) {
+            //     table[index].innerHTML=index+7;
+            // }
+            // let tbody = document.getElementById('table').tBodies[0].rows[0].cells
+            //表格元素.tBodies//获取此表格中的tbody返回对象数组
+            //tbody元素.rows//获取此tbody中的行节点
+            //表格行元素.cells//获取此行节点中列节点
+            // for (let index = 0; index < tbody.length; index++) {
+            //     console.log(tbody[index]);
+            // }
+            let name = document.getElementById('name');
+            let age = document.getElementById('age');
+            let add = document.getElementById('add');
+            let table = document.getElementById('table');
+
+            add.onclick=()=>{
+                let nameCon = name.value;
+                let ageCon = age.value;
+                let tLength = table.rows.length;
+                console.log(tLength,nameCon,ageCon);
+                let newRow = document.createElement('tr');
+                newRow.innerHTML=`<td>${tLength}</td><td>${nameCon}</td><td>${ageCon}</td>`
+                table.tBodies[0].append(newRow);
+            };
+        }
+    </script>
+</head>
+<body>
+    <br/>
+    姓名：<input type="text" id="name">
+    年龄：<input type="text" id="age">
+    <input type="button" id="add" value="添加">
+    <table id="table" border="1">
+        <!-- table中tbody可以有多个，thead,tfoot都只能有一个 -->
+        <!-- <thead></thead> -->
+        <!-- <tbody> -->
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>刘某人</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>邓某人</td>
+                <td>18</td>
+            </tr>
+        <!-- </tbody> -->
+        <!-- <tfoot></tfoot> -->
+    </table>
+</body>
+</html>

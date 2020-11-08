@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创建Vue</title>
+</head>
+
+<body>
+    <script src="vue.js"></script><!-- 引入Vue文件 -->
+    <div id="app"><!-- 需要控制的视图 -->
+        {{str}}<!-- 声明变量 -->
+    </div>
+    <script>
+        /*引入Vue以后会生成全局变量Vue
+        * new Vue时需要传入一个对象，
+        * 有两个重要属性el代表element(元素id选择器)
+        * data保存数据，视图中声明了那些变量({{str}})
+        * 就得在data中注册赋值初始化(str:"hello world")*/
+        var app = new Vue({
+            el: "#app",
+            data: {
+                str: "hello world",
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM</title>
+    <script>
+        document.write('write');//会清空body再写入
+        var w = null;
+        function wopen(v){
+            w = window.open('about:blank','1','width=100,height=100');
+            w.moveTo(300,300)
+            console.log(w.closed);
+        };
+        function wclose(){
+        /**window.close()关闭本窗口
+         * 火狐不能直接关闭非脚本打开的窗口(用户自行点开的)
+         * 比如你点开本页面，如有需求关闭本页面
+         * 先执行window.open('本页面地址','_self')
+         * 覆盖页面后在去关闭页面
+         **/
+        w.close();
+        console.log(w.closed);
+        };
+
+        //返回浏览器信息字符串
+        console.log(window.navigator.userAgent);
+
+        //当前网页地址，可赋值新地址实现网页跳转
+        console.log(window.location);
+    </script>
+</head>
+<body>
+    <input type="button" value="onclick" onclick="wopen()">
+    <input type="button" value="close" onclick="wclose()">
+</body>
+</html>

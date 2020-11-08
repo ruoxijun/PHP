@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--v-if和v-show效果相同，频繁切换用show，条件很少改变if-->
+        <!--if是真实渲染，标签根据条件销毁和重建-->
+        <p v-if="num==0">num==0</p><!--可以是表达式或bool值-->
+        <p v-else-if="num==1">num==1</p>
+        <p v-else>else</p>
+        <!--show本质是通过CSS控制是否显示，标签始终在页面上-->
+        <p v-show="show==true">Show</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello Vue",
+                num:1,
+                show:true,
+            },
+        });
+    </script>
+</body>
+</html>

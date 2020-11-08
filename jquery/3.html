@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3</title>
+</head>
+<style>
+    *{padding: 0px;margin: 0px;}
+    #app{
+        background: salmon;
+        width: 500px;
+        height: 500px;
+        padding: 10px;
+        margin: 20px;
+        border: 1px solid red;
+        position: relative;
+    }
+    #a{
+        width: 100px;
+        height: 100px;
+        background: seagreen;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    #scroll{
+        margin-left:100px ;
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<script src="jquery-3.5.1.js"></script>
+<script>
+    $(()=>{
+        //元素实际宽度
+        // console.log($("#app").width());
+        // $("#app").width("200");//设置宽度
+        // //实际宽+内边距
+        // console.log($("#app").innerWidth());
+        // //实际宽+内边距+边框
+        // console.log($("#app").outerWidth());
+        // //传入true：实际宽+内边距+边框+外边距
+        // console.log($("#app").outerWidth(true));
+
+        //元素相对窗口位置
+        // console.log($("#a").offset().left);
+        // console.log($("#a").offset().top);
+        // $("#a").offset({//以对象方式设置值
+        //     left:50,
+        //     top:50
+        // });
+
+        // //元素相对定位父类元素的位置
+        // console.log($("#a").position().left);
+        // console.log($("#a").position().top);
+
+        // $("#a").click(()=>{
+        //     //获取元素内滚动距离
+        //     console.log(($("#scroll").scrollTop()));
+        //     //设置元素内滚动的距离
+        //     $("#scroll").scrollTop(1000);
+        //     //网页滚动，由于兼容性问题建议如下写法
+        //     console.log($("html").scrollTop()+$("body").scrollTop());
+        //     $("body,html").scrollTop(6);
+        // });
+
+        
+    });
+</script>
+<body>
+    <textarea name="" id="scroll">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </textarea>
+    <div id="app">
+        <div id="a"></div>
+    </div>
+</body>
+</html>

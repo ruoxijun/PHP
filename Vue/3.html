@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+    </div>
+
+    <script>
+        //生命周期函数需要在Vue创建的时候以属性的方式声明
+        //生命周期函数中不能使用箭头函数(箭头函数中没有this)
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello world"
+            },
+            beforeCreate:function(){//页面创建之前
+                console.log('beforeCreate');
+            },
+            created:function(){//实例创建完成以后
+                console.log('created');
+            },
+            beforeMount:function(){//挂载之前
+                console.log('beforeMount');
+            },
+            mounted:function(){//挂载成功，el被新创建的vm.$el替换
+                console.log('mounted');
+            },
+            beforeUpdate:function(){//数据更新之前
+                console.log('beforeUpdate');
+            },
+            updated:function(){//数据更新完DOM也更新完毕
+                console.log('updated');
+            }
+        });
+        setTimeout(() => {
+            //Vue外访问Vue中属性需要给属性加上'$'
+            vm.$data.msg="Yes"
+        }, 3000);
+    </script>
+</body>
+</html>

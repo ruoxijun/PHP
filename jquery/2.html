@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.5.1.js"></script>
+    <script>
+        $(()=>{
+            // //选择器
+            // let div=$("div");
+            // console.log(div);
+            // div=$("div>ul");
+            // console.log(div);
+            // div=$("div li");
+            // console.log(div);
+
+            // //标签串
+            // let li=$("<li>5</li>");
+            // console.log(li)
+            // $('ul').append(li);
+
+        
+            let div=document.getElementsByTagName("div")[0];
+            //转换为一个jquery对象并返回
+            console.log($(div));
+
+            $(()=>{
+                /*
+                jquery对象都是伪数组：
+                有0到length-1的属性，和length属性
+                */
+                //模拟一个伪数组
+                let arr={0:"a",1:"b",2:"c",length:3};
+                $.each(arr,(index,value)=>{
+                    console.log(index+"--"+value);
+                });
+                
+                let a=$.map(arr,(value,index)=>{
+                    console.log(index+"--"+value);
+                    if(value>'a'){
+                        return true;
+                    }
+                    return false;
+                });
+                console.log(a);
+
+                let str="   abcdef   ";
+                console.log(str.trim());
+
+                console.log($.isWindow(window));
+                console.log($.isArray(arr));
+                console.log($.isFunction(()=>{}));
+            });
+            $.holdReady(true||false);
+
+            //即没有文本也没有子标签元素的元素
+            let empty=$("div:empty");
+            console.log(empty);
+            //有文本或有子标签元素的元素
+            let parent=$("div:parent");
+            console.log(parent);
+            //包含指定文本或标签的元素
+            let contains=$("div:contains('1')");
+            console.log(contains);
+            //子元素包含某标签的元素
+            let has=$("div:has('li')");
+            console.log(has);
+            
+            //获取标签节点属性
+            console.log($("input").attr("value"));
+            //设置标签节点属性(不存在将自动添加)
+            $("input").attr("value","text");
+            //移除标签某属性
+            $("input").removeAttr("value");
+
+            $("div").addClass("class");
+            $("div").removeClass("class");
+            $("div").toggleClass("class");
+
+            console.log($("div").html());//获取
+            $("div").html("<p>value</p>");//设置
+            console.log($("div").text());//获取
+            $("div").text("<p>value</p>");//设置
+
+            //获取某属性
+            console.log($("div").css("background"));
+            //设置属性，可链式添加
+            $("div").css("background","red").css("width","300px");
+            //对象方式设置属性
+            $("div").css({
+                background:"blue",
+                width:"200px",
+                height:"200px"
+            });
+        });
+    </script>
+    <title>2</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <input type="text" value="">
+    <div></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.5.1.js"></script>
+    <title>1</title>
+    
+    <script>
+
+        //释放'$'的使用权和自定义访问符
+        jQuery.noConflict();
+        var jq=jQuery.noConflict();
+        jq(()=>{
+            console.log("jq");
+        });
+
+        // <!-- 方法入口 -->
+        // 原生js写法
+        window.onload=()=>{
+            console.log("onload");
+        }
+        jQuery(document).ready(function(){
+            console.log("jQuery_ready");
+        });
+        jQuery(function(){
+            console.log("jQuery");
+        });
+        $(document).ready(function(){
+            console.log("$_ready");
+        });
+        //常用推荐
+        $(function(){
+            console.log("$");
+        });
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

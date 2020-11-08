@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!--用v-on指令监听DOM事件-->
+    <!--可写表达式，也可用函数，函数应定义在Vue的methods属性中-->
+    <div id="app" v-on:click='msg++'><!--v-on:click缩写是@click-->
+        {{msg}}
+        <!--函数key不可与data中的key重名，可不要函数括号-->
+        <p v-on:click.stop='adds'>{{add}}</p>
+        <!--$event是DOM事件可把他作为特殊变量传入-->
+        <p v-on:click.stop='count(msg,$event)'>{{add}}</p>
+
+        <!--更多修饰符，请参考Vue官网-->
+        <!-- 阻止单击事件继续传播 -->
+        <!-- <a v-on:click.stop="doThis"></a> -->
+        <!-- 提交事件不再重载页面 -->
+        <!-- <form v-on:submit.prevent="onSubmit"></form> -->
+        <!-- 修饰符可以串联 -->
+        <!-- <a v-on:click.stop.prevent="doThat"></a> -->
+        <!-- 只有修饰符 -->
+        <!-- <form v-on:submit.prevent></form> -->
+        <!-- 添加事件监听器时使用事件捕获模式 -->
+        <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+        <!-- <div v-on:click.capture="doThis">...</div> -->
+        <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- 即事件不是从内部元素触发的 -->
+        <!-- <div v-on:click.self="doThat">...</div> -->
+        <!-- 点击事件将只会触发一次 -->
+        <!-- <a v-on:click.once="doThis"></a> -->
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:0,
+                add:0,
+            },
+            methods: {//用来定义存放函数体
+                adds:function(){
+                    this.add++;
+                },
+                count:function(i,event){
+                    this.add+=i;
+                    console.log(event);//查看$event中的属性
+                }
+            },
+        });
+        //javascript中也可通过Vue对象直接访问methods中的函数
+        // vm.$methods.adds();//报错
+        vm.adds();//必须要有括号
+    </script>
+</body>
+</html>

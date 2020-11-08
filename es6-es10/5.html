@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+</head>
+<body>
+    <script>
+        /**
+         * 根据自定义函数返回一个映射数组
+         * 需要传入一个函数，函数中参数为数组的元素
+         * 此函数所有返回值整理为数组返回
+        **/
+        //arrayName.map(function(values){})映射
+        let array = [30,99,49,88,20];
+        /*let map = array.map(function(num){
+            return num>=60?'及格':'不及格';
+        });*///替换为箭头函数
+        let map = array.map(value => value>=60?'及格':'不及格');
+        console.log(...array);//30 99 49 88 20
+        console.log(...map);//不及格 及格 不及格 及格 不及格
+
+        /**
+         * 根据自定义函数返回一个汇总值
+         * 需要传入一个函数作为参数，
+         * 函数中参数需要3个，参1第一次是数组第一个元素
+         * 之后参1为此函数的返回值。
+         * 参2一次是数组第二个元素，之后依次获取数组元素
+         * 参3为参2的角标
+        **/
+        //arrayName.reduce(function(values){})汇总
+        let reduce = array.reduce((newValue,nextValue,index)=>{
+            console.log(newValue,nextValue,index);
+            return newValue+nextValue;
+        });
+        console.log(reduce);
+        
+        //arrayName.filter(function(values){})过滤器
+        let filter = array.filter((value)=>{
+            if(value%2!=0)
+                return false;//值被抛弃
+            return true;//为真则当前值存入该方法返回值数组中
+            //return value%2!=0;//简写
+        });
+        console.log(filter);
+
+        //arrayName.forEach(function(values){})迭代器
+        array.forEach((value,index)=>{//没有返回值
+            console.log(value , index);
+        });
+
+    </script>
+</body>
+</html>

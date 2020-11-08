@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+    <script>
+        /** 
+         * 请确保你的网站是以服务器方式打开,
+         * 且请求文件和网页文件都在服务器中。
+         * 1，创建Ajax对象
+         * 2，连接服务器
+         * 3，发送请求
+         * 4，接受返回值
+         */
+        window.onload=()=>{
+            let submit = document.getElementById('submit');
+            submit.onclick=()=>{
+                //1,创建ajax对象：new XMLHttpRequest();
+                let ajax = new XMLHttpRequest();
+                console.log(ajax);
+                /**浏览器在访问应用时会缓存应用，当下一次访问时拿
+                 * 缓存好的网页给用户，以至于Ajax请求同一网页数据时无法更新。
+                 * 解决方法：改变Ajax请求的URL，在URL后'URL?t='+ new Date().getTime()
+                 * 原理：在网页地址后添加?name=value不会对网页产生影响。
+                 */
+                //2,连接服务器：ajax.open(连接方式,URL,是否异步);
+                ajax.open('GET','test.txt?t='+ new Date().getTime(),true);
+                /**
+                 * 参1，连接方式GET(推荐),POST两种
+                 * 参2，url请求文件的路径(上两参都以字符串形势)
+                 * 参3，true异步(推荐)，false同步
+                 * 同步：多个事件一个一个处理(多线程加锁)
+                 * 异步：多个事情一起做(多个线程)
+                 */
+                //3,发送请求：ajax.send();
+                ajax.send();
+                //4,接收返回(事件)：ajax.onreadystatechange=function;
+                ajax.onreadystatechange=()=>{
+                    /**ajax.readyState;//检查请求状态
+                     * readyState返回int：
+                     * 0：未初始化(未调用open方法)
+                     * 1：载入(已调用send方法，正在发送请求)
+                     * 2：载入完成(send方法完成且收到响应内容)
+                     * 3：解析(正在解析响应内容)
+                     * 4：完成(解析完成，等待调用)，无论解析成功还是失败
+                     * ajax.status==200//true表示解析成功
+                     */
+                    if(ajax.readyState==4){//请求完成时
+                        if(ajax.status==200){//解析是否内容成功
+                            let str = ajax.responseText;//返回解析成功的文本
+                            console.log(str);
+                            console.log(JSON.parse(str));//字符串转JSON输出
+                            //eval可将一个JavaScript代码字符串求值成特定的对象(解析json对象时在此字符串加上括号)
+                            console.log((eval('('+str+')')));//字符串转JSON输出
+                        } else{
+                            console.log('读取失败');
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="submit" value="读取">
+</body>
+</html>

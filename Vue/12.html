@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件注册</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <textcom></textcom>
+    </div>
+    <script>
+        //下方法是全局注册的组件，在任何new Vue.el注册过的实例的标签中使用
+        // Vue.component(id, obj);
+        
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"hello Vue"
+            },
+            // 在Vue对像中创建组件，为局部注册只能在此Vue对象el管理的标签中使用
+            components:{//在此属性中创建组件
+                textcom:{//text属性名对应,它管理的对象来描述组件
+                    template:"<h4>new components</h4>",
+                    //除以上区别外跟Vue.component(id, obj);的使用方法都一样
+                },
+                //还可在此注册多个组件，用','隔开
+            }
+        });
+    </script>
+</body>
+</html>
